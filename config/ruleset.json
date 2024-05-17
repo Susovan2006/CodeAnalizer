@@ -1,0 +1,34 @@
+{
+    "ruleset": [
+        {
+            "ruleNo": 1,
+            "ruleType":"SpringBoot",
+            "ruleDescription": "Search if the application is a SpringBoot App",
+            "listOfSearchFileType": [".java",".xml",".properties"],
+            "listOfSearchString": ["@SpringBootApplication"],
+            "listOfSearchRegex": null,
+            "listOfSearchFilePattern": ["application*.properties","logback*.xml"],
+            "isAlertEnabled": true
+        },
+        {
+            "ruleNo": 2,
+            "ruleType":"Rest Controller",
+            "ruleDescription": "Search is the Application has REST API",
+            "listOfSearchFileType": [".java"],
+            "listOfSearchString": ["@RestController"],
+            "listOfSearchRegex": null,
+            "listOfSearchFilePattern": null;
+            "isAlertEnabled": false
+        },
+        {
+            "ruleNo": 3,
+            "ruleType":"email",
+            "ruleDescription": "Search is the Application has email",
+            "listOfSearchFileType": [".java",".properties"],
+            "listOfSearchString": ["pop3"],
+            "listOfSearchRegex":["\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b"] ,
+            "listOfSearchFilePattern": null,
+            "isAlertEnabled": false
+        }
+    ]
+}

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Trust Store</title>
+    <style media="screen">
+        body {
+            font-family: 'Segoe UI','Microsoft Sans Serif',sans-serif;
+        }
+
+        header:before, header:after {
+            content: " ";
+            display: table;
+        }
+
+        header:after {
+            clear: both;
+        }
+
+.invoiceNbr {
+			background: linear-gradient(to top, #e0e0e0, #ffffff);
+            font-size: 40px;          
+			color: black; 
+            padding: 20px;
+        }
+        .logo {
+            float: left;
+        }
+
+        .from {
+            float: left;
+        }
+
+        .to {
+            float: right;
+        }
+
+        .fromto {
+            border-style: solid;
+            border-width: 1px;
+            border-color: #e8e5e5;
+            border-radius: 5px;
+            margin: 10px;
+            min-width: 150px;
+        }
+
+		.alert {
+            border-style: solid;
+            border-width: 1px;
+            border-color: #fac5c5;
+            border-radius: 5px;
+            margin: 10px;
+            min-width: 150px;
+        }
+
+        .fromtocontent {
+            margin: 10px;
+            margin-right: 15px;
+        }
+
+        .panel {
+            background-color: #e8e5e5;
+            padding: 7px;
+        }
+
+        .generalPanel {
+            background-color: #e8e5e5;
+            padding: 7px;
+        }
+
+        .alertPanel {
+            background-color: #fac5c5;
+            padding: 7px;
+        }
+
+        .items {
+            clear: both;
+            display: table;
+            padding: 20px;
+        }
+.rules{
+            clear: both;
+            padding: 5px;
+        }
+        /* Factor out common styles for all of the "col-" classes.*/
+        div[class^="col-"] {
+            display: table-cell;
+            padding: 7px;
+        }
+
+        /*for clarity name column styles by the percentage of width */
+        .col-1-10 {
+            width: 10%;
+        }
+
+        .col-1-52 {
+            width: 52%;
+        }
+
+        .row {
+            display: table-row;
+            page-break-inside: avoid;
+        }
+
+.collapsible {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  padding: 5px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: lavender;
+}
+
+.content {
+  padding: 0 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+  background-color: #ffffff;
+}#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+} 
+    </style>
+
+</head>
+<body>
+    <header>
+        <div class="invoiceNbr">
+            Application Code analysis Report for Trust Store
+        </div>
+        
+    </header> <Br> <Br><Br> <Br>
+ <div class="alert from">
+        <div class="alertPanel">SpringBoot</div>
+        <div class="fromtocontent">
+            <span>20</span><br />
+        </div>
+    </div>
+<div class="fromto from">
+        <div class="generalPanel">Rest Controller</div>
+        <div class="fromtocontent">
+            <span>7</span><br />
+        </div>
+    </div>
+<div class="fromto from">
+        <div class="generalPanel">email</div>
+        <div class="fromtocontent">
+            <span>38</span><br />
+        </div>
+    </div>
+
+<button class="collapsible">
+	<p style="color:green; font-size:20px; font-family:Courier;"> Complexity Analysis for Trust Store </p> 
+	</button> 
+<div class="content"> 
+ <BR>
+<b>The Complixity of the Project is : <font color='red'>Double Complex</font><b/><BR><BR><table id="customers"> 
+  <tr>
+    <th>File Extensions Present in the Project</th>
+    <th>File Count</th>
+    <th>Lines of Code Count (US)</th>
+    <th>Lines of Code Count (in K)</th>
+  </tr><tr>
+  <td>name</td>
+  <td>1</td>
+  <td>1</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td>2</td>
+  <td>3</td>
+  <td>3</td>
+</tr>
+<tr>
+  <td>MF</td>
+  <td>1</td>
+  <td>6</td>
+  <td>6</td>
+</tr>
+<tr>
+  <td>cmd</td>
+  <td>1</td>
+  <td>182</td>
+  <td>182</td>
+</tr>
+<tr>
+  <td>xml</td>
+  <td>6</td>
+  <td>587</td>
+  <td>587</td>
+</tr>
+<tr>
+  <td>scss</td>
+  <td>6</td>
+  <td>882</td>
+  <td>882</td>
+</tr>
+<tr>
+  <td>json</td>
+  <td>24</td>
+  <td>954</td>
+  <td>954</td>
+</tr>
+<tr>
+  <td>txt</td>
+  <td>19</td>
+  <td>2,074</td>
+  <td>2K</td>
+</tr>
+<tr>
+  <td>sql</td>
+  <td>18</td>
+  <td>6,216</td>
+  <td>6K</td>
+</tr>
+<tr>
+  <td>ts</td>
+  <td>240</td>
+  <td>13,149</td>
+  <td>13K</td>
+</tr>
+<tr>
+  <td>java</td>
+  <td>209</td>
+  <td>22,634</td>
+  <td>22K</td>
+</tr>
+<tr>
+  <td>html</td>
+  <td>129</td>
+  <td>51,840</td>
+  <td>51K</td>
+</tr>
+<tr>
+  <td>css</td>
+  <td>510</td>
+  <td>396,078</td>
+  <td>396K</td>
+</tr>
+<tr>
+  <td>js</td>
+  <td>2,655</td>
+  <td>856,572</td>
+  <td>856K</td>
+</tr>
+<tr>
+  <td>Total</td>
+  <td>3,821</td>
+  <td>1,351,178</td>
+  <td>1,351K</td>
+</tr>
+</table> 
+</div><button class="collapsible">
+	<p style="color:black; font-size:20px; font-family:Courier;"> Rule No : 1:Search if the application is a SpringBoot App </p> 
+	</button> 
+<div class="content"> 
+<section class="items"> 
+<div class="row">
+            <div class="col-1-10 panel">
+                Java Files
+            </div>
+            <div class="col-1-52 panel">
+                Matches
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\java\com\josthi\web\JosthiApplication.java</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 13--> <mark>@SpringBootApplication</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\java\com\josthi\web\mail\SpringBootEmailTemplateApplication.java</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 18--> &#x2F;&#x2F;<mark>@SpringBootApplication</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>application-dev.properties</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>application-local.properties</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>application-prod.properties</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>application-qa.properties</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>application.properties</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>logback-spring.xml</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>application-dev.properties</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>application-local.properties</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>application-prod.properties</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>application-qa.properties</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>application.properties</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>logback-spring.xml</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>application-dev.properties</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>application-local.properties</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>application-prod.properties</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>application-qa.properties</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>application.properties</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>Matching File Name Found</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i><mark>logback-spring.xml</mark></i></p>
+            </div>
+        </div> 
+</div></section><button class="collapsible">
+	<p style="color:black; font-size:20px; font-family:Courier;"> Rule No : 2:Search is the Application has REST API </p> 
+	</button> 
+<div class="content"> 
+<section class="items"> 
+<div class="row">
+            <div class="col-1-10 panel">
+                Java Files
+            </div>
+            <div class="col-1-52 panel">
+                Matches
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\java\com\josthi\web\controller\rest\AssignAgentByAdminController.java</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 30--> <mark>@RestController</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\java\com\josthi\web\controller\rest\ProfilePictureController.java</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 37--> <mark>@RestController</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\java\com\josthi\web\controller\rest\ReSendOtpEmail.java</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 35--> <mark>@RestController</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\java\com\josthi\web\controller\rest\UserBuyPlanController.java</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 34--> <mark>@RestController</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\java\com\josthi\web\controller\rest\UserGeneralQueryController.java</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 30--> <mark>@RestController</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\java\com\josthi\web\controller\rest\UserPreferencesCheckBox.java</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 28--> <mark>@RestController</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\java\com\josthi\web\controller\rest\UserServiceRequestRestController.java</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 51--> <mark>@RestController</mark></i></p>
+            </div>
+        </div> 
+</div></section><button class="collapsible">
+	<p style="color:black; font-size:20px; font-family:Courier;"> Rule No : 3:Search is the Application has email </p> 
+	</button> 
+<div class="content"> 
+<section class="items"> 
+<div class="row">
+            <div class="col-1-10 panel">
+                Java Files
+            </div>
+            <div class="col-1-52 panel">
+                Matches
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\java\com\josthi\web\constants\Constant.java</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 119--> 	String JOSTHI_EMAIL = &quot;<mark>MyJosthi@gmail.com</mark>&quot;;</i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\java\com\josthi\web\constants\EmailConstant.java</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 7--> 	String EMAIL_FROM_FOR_PASSWORD_RECOVERY = &quot;<mark>account@josthi.com</mark>&quot;;</i></p><p style="color:#303030;"><i>Line 11--> 	String EMAIL_FROM_FOR_WELCOME = &quot;<mark>welcome@josthi.com</mark>&quot;;</i></p><p style="color:#303030;"><i>Line 15--> 	String EMAIL_FROM_FOR_OTP = &quot;<mark>account@josthi.com</mark>&quot;;</i></p><p style="color:#303030;"><i>Line 19--> 	String EMAIL_FROM_FOR_SERVICE = &quot;<mark>service@josthi.com</mark>&quot;;</i></p><p style="color:#303030;"><i>Line 23--> 	String EMAIL_FROM_FOR_AGENT_UPDATE = &quot;<mark>service@josthi.com</mark>&quot;;</i></p><p style="color:#303030;"><i>Line 27--> 	String EMAIL_FROM_FOR_ACCOUNT_UN_LOCK = &quot;<mark>welcome@josthi.com</mark>&quot;;</i></p><p style="color:#303030;"><i>Line 32--> 	String EMAIL_FROM_FOR_PLAN = &quot;<mark>invoice@josthi.com</mark>&quot;;</i></p><p style="color:#303030;"><i>Line 36--> 	String EMAIL_FROM_FOR_CUSTOMER_QUERY = &quot;<mark>confirmation@josthi.com</mark>&quot;;</i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\java\com\josthi\web\controller\rest\UserGeneralQueryController.java</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 75-->         	        String emailId = &quot;<mark>susovan2006@gmail.com</mark>&quot;;</i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\java\com\josthi\web\mail\EmailController.java</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 24-->         mail.setFrom(&quot;<mark>myjosthi@gmail.com</mark>&quot;);&#x2F;&#x2F;replace with your desired email</i></p><p style="color:#303030;"><i>Line 25-->         mail.setMailTo(&quot;<mark>susovan2006@gmail.com</mark>&quot;);&#x2F;&#x2F;replace with your desired email</i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\java\com\josthi\web\mail\SpringBootEmailTemplateApplication.java</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 37-->         mail.setFrom(&quot;<mark>myjosthi@gmail.com</mark>&quot;);&#x2F;&#x2F;replace with your desired email</i></p><p style="color:#303030;"><i>Line 38-->         mail.setMailTo(&quot;<mark>susovan2006@gmail.com</mark>&quot;);&#x2F;&#x2F;replace with your desired email</i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\java\com\josthi\web\MainController.java</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 189-->         	        String emailId = &quot;<mark>susovan2006@gmail.com</mark>&quot;;</i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\resources\application-dev.properties</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 35--> spring.mail.username=<mark>myjosthi@gmail.com</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\resources\application-local.properties</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 40--> spring.mail.username=<mark>myjosthi@gmail.com</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\resources\application-prod.properties</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 38--> spring.mail.username=<mark>admin@josthi.com</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\resources\application-qa.properties</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 7--> #Actuator Exposed for Monitoring - <mark>susovan2006@gmail.com</mark></i></p><p style="color:#303030;"><i>Line 39--> #spring.mail.username=<mark>myjosthi@gmail.com</mark></i></p><p style="color:#303030;"><i>Line 42--> spring.mail.username=<mark>admin@mockell.com</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\src\main\resources\JosthiConfig_DESKTOP-F218IAM.properties</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 34--> spring.mail.username=<mark>myjosthi@gmail.com</mark></i></p><p style="color:#303030;"><i>Line 37--> #spring.mail.username=<mark>mainaccount@mockell.com</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\target\classes\application-dev.properties</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 35--> spring.mail.username=<mark>myjosthi@gmail.com</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\target\classes\application-local.properties</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 40--> spring.mail.username=<mark>myjosthi@gmail.com</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\target\classes\application-prod.properties</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 38--> spring.mail.username=<mark>admin@josthi.com</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\target\classes\application-qa.properties</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 7--> #Actuator Exposed for Monitoring - <mark>susovan2006@gmail.com</mark></i></p><p style="color:#303030;"><i>Line 39--> #spring.mail.username=<mark>myjosthi@gmail.com</mark></i></p><p style="color:#303030;"><i>Line 42--> spring.mail.username=<mark>admin@mockell.com</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\target\classes\JosthiConfig_DESKTOP-F218IAM.properties</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 34--> spring.mail.username=<mark>myjosthi@gmail.com</mark></i></p><p style="color:#303030;"><i>Line 37--> #spring.mail.username=<mark>mainaccount@mockell.com</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\target\josthi-0.0.1\WEB-INF\classes\application-dev.properties</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 35--> spring.mail.username=<mark>myjosthi@gmail.com</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\target\josthi-0.0.1\WEB-INF\classes\application-local.properties</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 38--> spring.mail.username=<mark>myjosthi@gmail.com</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\target\josthi-0.0.1\WEB-INF\classes\application-prod.properties</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 38--> spring.mail.username=<mark>admin@josthi.com</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\target\josthi-0.0.1\WEB-INF\classes\application-qa.properties</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 38--> #spring.mail.username=<mark>myjosthi@gmail.com</mark></i></p><p style="color:#303030;"><i>Line 41--> spring.mail.username=<mark>admin@mockell.com</mark></i></p>
+            </div>
+        </div> 
+<div class="row">
+            <div class="col-1-10">
+                <p style="color:#303030;"><i>C:\Users\susov\eclipse-workspace\josthi\target\josthi-0.0.1\WEB-INF\classes\JosthiConfig_DESKTOP-F218IAM.properties</i></p>
+            </div>
+            <div class="col-1-52">
+                <p style="color:#303030;"><i>Line 34--> spring.mail.username=<mark>myjosthi@gmail.com</mark></i></p><p style="color:#303030;"><i>Line 37--> #spring.mail.username=<mark>mainaccount@mockell.com</mark></i></p>
+            </div>
+        </div> 
+</div></section><script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script></body>
+</html>
