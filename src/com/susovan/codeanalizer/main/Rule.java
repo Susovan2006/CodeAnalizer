@@ -4,13 +4,14 @@ import java.util.List;
 
 public class Rule {
 	private int ruleNo;
+	private boolean isRuleEnabled;
 	private String ruleType;
     private String ruleDescription;
     private List<String> listOfSearchFileType;
     private List<String> listOfSearchString;
     private List<String> listOfSearchRegex;
     private List<String> listOfSearchFilePattern;
-    private boolean isAlertEnabled;;
+    private boolean isAlertEnabled;
     
     
     
@@ -64,6 +65,12 @@ public class Rule {
 	}
 	public void setListOfSearchFilePattern(List<String> listOfSearchFilePattern) {
 		this.listOfSearchFilePattern = listOfSearchFilePattern;
+	}
+	public boolean isRuleEnabled() {
+		return isRuleEnabled;
+	}
+	public void setRuleEnabled(boolean isRuleEnabled) {
+		this.isRuleEnabled = isRuleEnabled;
 	}
 
 	

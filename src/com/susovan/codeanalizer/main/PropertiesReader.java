@@ -18,6 +18,9 @@ public class PropertiesReader {
     private String complexityCriteria;
     //private 
     
+    private String isAnalysisAndDesignSectionEnabled;
+    private String pathForAnalysisAndDesignTemplate;
+    
     
     // Add more keys as needed
 
@@ -44,6 +47,8 @@ public class PropertiesReader {
             isComplexityAnalysisEnabled = prop.getProperty("is.code.complexity.analysis.enabled");
             complexityAnalysisExcludeExtension = prop.getProperty("code.complexity.analysis.exclude.extensions");
             complexityCriteria = prop.getProperty("complexity.criteria");
+            isAnalysisAndDesignSectionEnabled = prop.getProperty("is.code.analysis.design.enabled");
+            pathForAnalysisAndDesignTemplate = prop.getProperty("analysis.design.template.file.location");
             
             
             
@@ -108,6 +113,22 @@ public class PropertiesReader {
 
 	public void setComplexityCriteria(String complexityCriteria) {
 		this.complexityCriteria = complexityCriteria;
+	}
+
+	public String getIsAnalysisAndDesignSectionEnabled() {
+		return isAnalysisAndDesignSectionEnabled;
+	}
+
+	public void setIsAnalysisAndDesignSectionEnabled(String isAnalysisAndDesignSectionEnabled) {
+		this.isAnalysisAndDesignSectionEnabled = isAnalysisAndDesignSectionEnabled;
+	}
+
+	public String getPathForAnalysisAndDesignTemplate() {
+		return pathForAnalysisAndDesignTemplate;
+	}
+
+	public void setPathForAnalysisAndDesignTemplate(String pathForAnalysisAndDesignTemplate) {
+		this.pathForAnalysisAndDesignTemplate = pathForAnalysisAndDesignTemplate;
 	}
 
 	

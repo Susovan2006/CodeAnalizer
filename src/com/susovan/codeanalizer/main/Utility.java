@@ -9,12 +9,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
+import com.susovan.codeanalizer.main.AnalysisDocumentSet.Analysis;
 import com.susovan.codeanalizer.main.LineCounter.FileData;
-import com.susovan.codeanalizer.main.SummeryBean;
+import com.susovan.codeanalizer.main.*;
 
 
 public class Utility {
@@ -27,7 +30,7 @@ public class Utility {
         		"    <title>"+heading+"</title>\r\n" + 
         		"    <style media=\"screen\">\r\n" + 
         		"        body {\r\n" + 
-        		"            font-family: 'Segoe UI','Microsoft Sans Serif',sans-serif;\r\n" + 
+        		"            font-family:Arial, Helvetica, sans-serif;\r\n" + 
         		"        }\r\n" + 
         		"\r\n" + 
         		"        header:before, header:after {\r\n" + 
@@ -195,12 +198,12 @@ public class Utility {
 		return htmlString;
 	}
 	
-	public static String generateSummery(List<SummeryBean> summeryBeanList) {
-		StringBuffer summery = new StringBuffer();
-		for (SummeryBean summeryBean : summeryBeanList) {
-			summery.append(generateHtmlStringSummeryDiv(summeryBean.getRuleType(),summeryBean.getCountMatch(), summeryBean.isAlert()));
+	public static String generateSummery(List<SummaryBean> summaryBeanList) {
+		StringBuffer summary = new StringBuffer();
+		for (SummaryBean summaryBean : summaryBeanList) {
+			summary.append(generateHtmlStringSummeryDiv(summaryBean.getRuleType(),summaryBean.getCountMatch(), summaryBean.isAlert()));
         }
-		return summery.toString();
+		return summary.toString();
 	}
 	
 	public static String generateHtmlStringSummeryDiv(String ruleType, int countMatch, boolean alert) {
@@ -416,12 +419,13 @@ public class Utility {
 	
 	public static String endHtmlTable() {
 		return "</table> \r\n" + 
-				"</div>";
+				"</div> \r\n"+
+				"*********SummarySestion***********";
 	}
 	
 	public static String addComplexityToHtmlReport(String complexityValue) {
 		return "\r\n" + 
-				"<b>The Complixity of the Project is : <font color='red'>"+complexityValue+"</font><b/>"+
+				"<b>The Complixity of the Project is : <font color='red'>"+complexityValue+"</font></b>"+
 				"<BR><BR>";
 	}
 	public static String formatNumberWithCommas(int number) {
@@ -434,5 +438,133 @@ public class Utility {
         }
         return formatNumberWithCommas(number / 1000) + "K";
     }
+
+//Added on 5/17/2024
+	
+	public static void printStartupBanner() throws InterruptedException {
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		TimeUnit.SECONDS.sleep(1);
+		System.out.println("  ####       ##    ##########");
+		TimeUnit.MILLISECONDS.sleep(300);
+        System.out.println(" #    *     ## #       ##");
+        TimeUnit.MILLISECONDS.sleep(300);
+        System.out.println("#          ##   #      ##   ####  ####  #");
+        TimeUnit.MILLISECONDS.sleep(300);
+        System.out.println("#         #######      ##   #  #  #  #  #");
+        TimeUnit.MILLISECONDS.sleep(300);
+        System.out.println(" #    *  ##      #     ##   #  #  #  #  #   #");
+        TimeUnit.MILLISECONDS.sleep(300);
+        System.out.println("  ####  ##        #    ##   ####  ####  ####");
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("");
+		System.out.println("");
+		System.out.println("");
+	}
+	public static void printComplexityAnalysisConsole() {
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("**********************************************************");
+ 		System.out.println("   Section 1 :   Complexity Analysis Section			  ");
+ 		System.out.println("**********************************************************");
+ 		System.out.println("");
+ 		System.out.println("Step 1 --> Searching in the Project for File Extensions......");
+		
+	}
+
+
+	public static void printRuleSetDetailsConsole(Ruleset ruleset) {
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("___________________________________________________________");
+ 		System.out.println(".     RULES SET VERSION : "+ruleset.getRulesetVersion());
+ 		System.out.println(".     RULES SET UPDATE DATE : "+ruleset.getRulesetUpdateDate());
+ 		System.out.println(".     RULES SET AUTHOR : "+ruleset.getRulesetAuthor());
+ 		System.out.println(".     RULES SET DESCRIPTION : "+ruleset.getRulesetDescription());
+ 		System.out.println("___________________________________________________________");
+		
+	}
+
+
+	public static void printAnalysisAndDesignConsole() {
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("**********************************************************");
+ 		System.out.println("   Section 3 :   Analysis and Design Section			  ");
+ 		System.out.println("**********************************************************");
+ 		System.out.println("");
+ 		System.out.println("Step 1 --> Generating the Cloud Migration Suggestions.......");
+ 		
+	}
+
+
+	public static String generateHTMLForAnalaysisAndDesign(List<Analysis> analysisDocSet,
+															List<SummaryBean> summaryBeans) {
+		List<String> matchedAnalysisSuggestions = new ArrayList<>();
+
+
+		for (SummaryBean summeryBean : summaryBeans) {
+            String ruleType = summeryBean.getRuleType();
+
+            for (Analysis analysis : analysisDocSet) {
+                if (analysis.getAnalysisTechKey().equalsIgnoreCase(ruleType)) {
+                	matchedAnalysisSuggestions.add(analysis.getAnalysisTechSuggestion());
+                }
+            }
+        }
+
+        return formatAnalysisSection(matchedAnalysisSuggestions);
+
+	}
+	
+	private static String formatAnalysisSection(List<String> suggestionList) {
+		
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("<button class=\"collapsible\"> \r\n"); 
+		sb.append("	<p style=\"color:green; font-size:20px; font-family:Courier;\"> Analysis & Design: Migration Approach </p> \r\n");
+		sb.append("	</button> \r\n"); 
+		sb.append("<div class=\"content\">\r\n"); 
+		sb.append(" <BR>\r\n"); 
+		sb.append("<b>Migration Approach</b><BR><BR>\r\n");
+		sb.append("<ul> \r\n");
+		for(String suggestion : suggestionList) {
+			sb.append("<li style=\"color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;\"> "+suggestion+"</li> \r\n");
+		}
+		sb.append("</ul> \r\n");
+		sb.append("</div> \r\n");
+		
+		return sb.toString();
+	}
+	
+	
+
+	public static String generateFinalReportWithAnalysis(String partialReport, String analysisAndDesignSection,
+			String isAnalysisAndDesignSectionEnabled) {
+		if(isAnalysisAndDesignSectionEnabled.equalsIgnoreCase("true")) {
+			return replaceString("*********SummarySestion***********",partialReport, analysisAndDesignSection );
+		}else {
+			return replaceString("*********SummarySestion***********",partialReport, "" );
+		}
+		
+	}
+	
+	//Code done on May 23 , 2024
+	public static void printRuleSetForAnalysisConsole(AnalysisDocumentSet analysisSocumentSet) {
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("___________________________________________________________");
+ 		System.out.println(".     SUGGESTION RULES SET VERSION : "+analysisSocumentSet.getAnalysisDocVersionNo());
+ 		System.out.println(".     SUGGESTION RULES SET UPDATE DATE : "+analysisSocumentSet.getAnalysisDocLastUpdateDate());
+ 		System.out.println(".     SUGGESTION RULES SET AUTHOR : "+analysisSocumentSet.getAnalysisDocAuthor());
+ 		System.out.println(".     SUGGESTION RULES SET DESCRIPTION : "+analysisSocumentSet.getAnalysisDocDescription());
+ 		System.out.println("___________________________________________________________");
+	}
 	
 }

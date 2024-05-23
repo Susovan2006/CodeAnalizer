@@ -1,7 +1,12 @@
 {
+	"rulesetVersion": "1.0",
+    "rulesetAuthor": "Susovan Sankar Gumtya",
+    "rulesetUpdateDate": "May-19-2024",
+    "rulesetDescription": "Ruleset for Java Application",
     "ruleset": [
         {
             "ruleNo": 1,
+            "isRuleEnabled": true,
             "ruleType":"SpringBoot",
             "ruleDescription": "Search if the application is a SpringBoot App",
             "listOfSearchFileType": [".java",".xml",".properties"],
@@ -12,6 +17,7 @@
         },
         {
             "ruleNo": 2,
+            "isRuleEnabled": false,
             "ruleType":"Rest Controller",
             "ruleDescription": "Search is the Application has REST API",
             "listOfSearchFileType": [".java"],
@@ -22,6 +28,7 @@
         },
         {
             "ruleNo": 3,
+            "isRuleEnabled": true,
             "ruleType":"email",
             "ruleDescription": "Search is the Application has email",
             "listOfSearchFileType": [".java",".properties"],

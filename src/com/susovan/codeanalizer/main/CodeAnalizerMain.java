@@ -22,7 +22,7 @@ public class CodeAnalizerMain {
 		outPutReport.append("<Html>");
 		outPutReport.append(SearchUtil.generateHtmlReport("Analysis Report for TPR"));
 		
-		List<SummeryBean> summeryBeans = new ArrayList<SummeryBean>();
+		List<SummaryBean> summeryBeans = new ArrayList<SummaryBean>();
 		
 		 Gson gson = new Gson();
 	        try (Reader reader = new FileReader("C:\\Users\\susov\\eclipse-workspace\\CodeAnalizer\\src\\ruleset.json")) {
@@ -61,7 +61,7 @@ public class CodeAnalizerMain {
 	        	                    
 	        	                } 
 	        	            }
-	        	            SummeryBean summeryBean = new SummeryBean();
+	        	            SummaryBean summeryBean = new SummaryBean();
 	    	                summeryBean.setRuleType(rule.getRuleType());
 	    	                summeryBean.setCountMatch(matchCount);
 	    	                summeryBeans.add(summeryBean);
