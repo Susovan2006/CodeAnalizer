@@ -11,9 +11,11 @@ import java.io.InputStream;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import com.susovan.codeanalizer.main.AnalysisDocumentSet.Analysis;
 import com.susovan.codeanalizer.main.LineCounter.FileData;
@@ -462,6 +464,34 @@ public class Utility {
 		System.out.println("");
 		System.out.println("");
 	}
+	
+	public static void printStartupBanner1() throws InterruptedException {
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		TimeUnit.SECONDS.sleep(1);
+		System.out.println(" .d8888b.                888                       d8888                   888                   d8b                88888888888                888"); 
+		TimeUnit.MILLISECONDS.sleep(200);
+		System.out.println("d88P  Y88b               888                      d88888                   888                   Y8P                    888                    888");
+		TimeUnit.MILLISECONDS.sleep(200);
+		System.out.println("888    888               888                     d88P888                   888                                          888                    888"); 
+		TimeUnit.MILLISECONDS.sleep(200);
+		System.out.println("888         .d88b.   .d88888  .d88b.            d88P 888 88888b.   8888b.  888 888  888 .d8888b  888 .d8888b            888   .d88b.   .d88b.  888"); 
+		TimeUnit.MILLISECONDS.sleep(200);
+		System.out.println("888        d88''88b d88' 888 d8P  Y8b          d88P  888 888 '88b     '88b 888 888  888 88K      888 88K                888  d88''88b d88''88b 888");
+		TimeUnit.MILLISECONDS.sleep(200);
+		System.out.println("888    888 888  888 888  888 88888888         d88P   888 888  888 .d888888 888 888  888 'Y8888b. 888 'Y8888b.           888  888  888 888  888 888"); 
+		TimeUnit.MILLISECONDS.sleep(200);
+		System.out.println("Y88b  d88P Y88..88P Y88b 888 Y8b.            d8888888888 888  888 888  888 888 Y88b 888      X88 888      X88           888  Y88..88P Y88..88P 888"); 
+		TimeUnit.MILLISECONDS.sleep(200);
+		System.out.println("  Y8888P'   'Y88P.   'Y88888  'Y8888        d88P     888 888  888 'Y888888 888  'Y88888  88888P' 888  88888P'           888   'Y88P'   'Y88P'  888"); 
+		TimeUnit.MILLISECONDS.sleep(200);
+		System.out.println("                                                                                    888                                                            ");
+		TimeUnit.MILLISECONDS.sleep(200);
+		System.out.println("                                                                               Y8b d88P                                                            ");
+		TimeUnit.MILLISECONDS.sleep(200);
+		System.out.println("                                                                                'Y88P'                                                             ");
+	}
 	public static void printComplexityAnalysisConsole() {
 		System.out.println("");
 		System.out.println("");
@@ -503,16 +533,23 @@ public class Utility {
 	}
 
 
-	public static String generateHTMLForAnalaysisAndDesign(List<Analysis> analysisDocSet,
+	public static String generateHTMLForAnalaysisAndDesign(List<String> analysisSubCategoryListByUser,
+															List<Analysis> analysisDocSet,
 															List<SummaryBean> summaryBeans) {
+				
+		System.out.println(analysisSubCategoryListByUser);
+		
 		List<String> matchedAnalysisSuggestions = new ArrayList<>();
 
-
+		//RUleType Can be --> Spring Boot | Spring MVC | EJB | MQ etc
 		for (SummaryBean summeryBean : summaryBeans) {
             String ruleType = summeryBean.getRuleType();
-
+            
+            //Analysis Key can be Spring Boot | Spring MVC | EJB | MQ
             for (Analysis analysis : analysisDocSet) {
-                if (analysis.getAnalysisTechKey().equalsIgnoreCase(ruleType)) {
+            	//System.out.println("--"+analysis.getAnalysisTechKey());
+                if (analysis.getAnalysisTechKey().equalsIgnoreCase(ruleType) &&
+                		findStringInList(analysisSubCategoryListByUser, analysis.getAnalysisCategory())) {               	
                 	matchedAnalysisSuggestions.add(analysis.getAnalysisTechSuggestion());
                 }
             }
@@ -566,5 +603,106 @@ public class Utility {
  		System.out.println(".     SUGGESTION RULES SET DESCRIPTION : "+analysisSocumentSet.getAnalysisDocDescription());
  		System.out.println("___________________________________________________________");
 	}
+	
+	public static boolean findStringInList(List<String> list, String searchString) {
+        for (String str : list) {
+            if (str.equals(searchString)) {
+                return true;
+            }
+        }
+        return false;
+    }
+	
+	public static String generateHTMLForAnalaysisAndDesignV2(List<String> analysisSubCategoryListByUser,
+															List<Analysis> analysisDocSet,
+															List<SummaryBean> summaryBeans) {
+		
+		//Here We are Extracting only the Matched RuleSet.
+		List<String> matchedRulesSetList = new ArrayList<>();
+		for (SummaryBean summeryBean : summaryBeans) {
+			matchedRulesSetList.add(summeryBean.getRuleType());
+		}
+		
+		List<Analysis> filteredAnalysisList = filterAnalysisByCategoryAndTechKey(analysisDocSet, 
+																				analysisSubCategoryListByUser,
+																				matchedRulesSetList);
+		
+		System.out.println("Actual Analysis List Size =>"+analysisDocSet.size());
+		System.out.println("Filtered List Size =>"+filteredAnalysisList.size());
+		
+		return groupAndOrderAnalysisByCategory(filteredAnalysisList,analysisSubCategoryListByUser);
+
+	}
+	
+	
+	//In this Method we are filtering the Aalysis bean, based on the Category input Provided by the user
+	//i.e. rewrite/refactor/blocker etc. And a set of rules that was found in the Application Code Analysis.
+	// e.g. Spring Boot, Spring MVC, EJB etc.
+	public static List<Analysis> filterAnalysisByCategoryAndTechKey(List<Analysis> analysisList, 
+																	List<String> categories, 
+																	List<String> techKeys) {
+        List<Analysis> filteredList = new ArrayList<>();
+        for (Analysis analysis : analysisList) {
+            if (categories.contains(analysis.getAnalysisCategory()) && techKeys.contains(analysis.getAnalysisTechKey())) {
+                filteredList.add(analysis);
+            }
+        }
+        return filteredList;
+    }
+	
+	
+	//Here We are ordering the Suggestions Based on the order specified by the Users in the config.properties.
+	//general,rewrite,refactor,risk,blocker,standard,out-of-scope
+    public static String groupAndOrderAnalysisByCategory(List<Analysis> analysisList, List<String> categories) {
+        
+    	
+    	Map<String, List<Analysis>> groupedAnalysis = analysisList.stream()
+                .collect(Collectors.groupingBy(Analysis::getAnalysisCategory));
+
+        Map<String, List<Analysis>> orderedAnalysis = new LinkedHashMap<>();
+        for (String category : categories) {
+            if (groupedAnalysis.containsKey(category)) {
+                orderedAnalysis.put(category, groupedAnalysis.get(category));
+            }
+        }
+
+        return formatAnalysisSubSection(orderedAnalysis);
+    }
+    
+       //Here we are building the HTML for the Suggestion.
+       private static String formatAnalysisSubSection(Map<String, List<Analysis>> analysisMap) {		
+    	StringBuffer sb = new StringBuffer();
+		sb.append("<button class=\"collapsible\"> \r\n"); 
+		sb.append("	<p style=\"color:green; font-size:20px; font-family:Courier;\"> Analysis & Design: Migration Approach </p> \r\n");
+		sb.append("	</button> \r\n"); 
+		sb.append("<div class=\"content\">\r\n");
+		// Display the map
+	    for (Map.Entry<String, List<Analysis>> entry : analysisMap.entrySet()) {
+			sb.append(" <BR>\r\n"); 
+			sb.append("<b> Suggestion on "+toCamelCase(entry.getKey())+"</b><BR><BR>\r\n");
+			sb.append("<ul> \r\n");
+	        for (Analysis analysis : entry.getValue()) {
+	        	sb.append("<li style=\"color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;\"> "+analysis.getAnalysisTechSuggestion()+"</li> \r\n");
+	        }
+	        sb.append("</ul> \r\n");
+	    }		
+		sb.append("</div> \r\n");
+		
+		return sb.toString();
+	}
+    
+	
+       public static String toCamelCase(String s) {
+           String[] parts = s.split(" ");
+           StringBuilder camelCaseString = new StringBuilder();
+           for (String part : parts){
+               if(part != null && part.trim().length() > 0){
+                   String word = part.trim();
+                   camelCaseString.append(Character.toUpperCase(word.charAt(0)));
+                   camelCaseString.append(word.substring(1));
+               }
+           }
+           return camelCaseString.toString();
+       }
 	
 }

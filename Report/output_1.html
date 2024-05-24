@@ -384,37 +384,53 @@
 	</button> 
 <div class="content">
  <BR>
-<b>Migration Approach</b><BR><BR>
+<b> Suggestion on General</b><BR><BR>
 <ul> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> In PCF application runs in a container, so SpringBoot is the best suit for PCF Environment, the cloud version of the code will use SpringBoot as well.</li> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Spring MVC is supported in PCF.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> EJB application is not recommended in PCF.</li> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Tomcat Apps are best fit for PCF cloud.</li> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> If the buildpack doesn't support WebLogic, minor refactor is neeed to move it to Tomcat.</li> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Should be compatable with PCF/TAS.</li> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> REST API is a good fit in PCF Container.</li> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Spring Batch can run in PCF, but Auto scaling might not be possible.</li> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> XLS File generation is supported in PCF, need to find if any NAS is being used, Any Encryption at Rest is in Place and the size of the XLS.</li> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Email Feature is available in PCF, but it will use a different SMTP host.</li> 
+</ul> 
+ <BR>
+<b> Suggestion on Rewrite</b><BR><BR>
+<ul> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> As the Application will be running in container, we can't have the JNDI config in the servers, It has to be migrated to Hikari Connection Pool'.</li> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> IBM MQ is possible in PCF, There might be some refactor/rewtite to establist the MQ in PCF. Need to create the services.</li> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> If the application has Cron/Quartz, Auto scaling is not possible. There has to be some rewrite to segrigate the Batch Portion.</li> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> If the application is Writing/Reading files in the Physical server, in PCF it should be NAS/HCP etc, So a portion of refactor has to be done.</li> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> PDF Generation is supported in PCF, but need to know the size of the PDF, the PDF generation consumes huge memory, so rewrite might be required to split into small modules.</li> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> ehcache Cache is a not a good fit for PCF/TAS, so it's better to move it to centralized Cache like Redis'.</li> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Siteminder is supported in PCF, but it's recommended to use PingFed. but this is based on Org.'</li> 
+</ul> 
+ <BR>
+<b> Suggestion on Refactor</b><BR><BR>
+<ul> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Plain Java Servlet Application can run in PCF, but needs refactor.</li> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> EAR is not supported in PCF, so the build file has tobe re-writen to be deployed in PCF.</li> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> If the buildpack doesn't support JBOSS, minor refactor is neeed to move it to Tomcat'.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Tomcat Apps are best fit for PCF cloud.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> If the buildpack doesn't support WebLogic, minor refactor is neeed to move it to Tomcat.</li> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> For Oracle DB minor refactor might be needed to make the app run from container. Also need to make sure, the App is not using JNDI.</li> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> For Teradata DB minor refactor might be needed to make the app run from container. Also need to make sure, the App is not using JNDI.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Database TX can be possible in PCF/TAS, need to make sure there is fault tolerance.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Should be compatable with PCF/TAS.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> As the Application will be running in container, we can't have the JNDI config in the servers, It has to be migrated to Hikari Connection Pool'.</li> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Kafka is possible in PCF, just needs to do some refactor and onboard the Kafka infrastructure.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> IBM MQ is possible in PCF, There might be some refactor/rewtite to establist the MQ in PCF. Need to create the services.</li> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Refactor might be needed based on App Complexity and no of SOAP Calls.</li> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Refactor might be needed based on App Complexity and no of SOAP Calls.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> REST API is a good fit in PCF Container.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Spring Batch can run in PCF, but Auto scaling might not be possible.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> If the application has Cron/Quartz, Auto scaling is not possible. There has to be some rewrite to segrigate the Batch Portion.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> If the application is Writing/Reading files in the Physical server, in PCF it should be NAS/HCP etc, So a portion of refactor has to be done.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> XLS File generation is supported in PCF, need to find if any NAS is being used, Any Encryption at Rest is in Place and the size of the XLS.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> PDF Generation is supported in PCF, but need to know the size of the PDF, the PDF generation consumes huge memory, so rewrite might be required to split into small modules.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Email Feature is available in PCF, but it will use a different SMTP host.</li> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Redis Cache is supported in PCF/TAS, just need to do some refactor to onboard the infrastructure.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> ehcache Cache is a not a good fit for PCF/TAS, so it's better to move it to centralized Cache like Redis'.</li> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> SSL Certificates are supported in PCF, but it's recommended to use a centralized certificate store.</li> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> PingFed is supported in PCF, just some modification is required to make it compatible.</li> 
-<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Siteminder is supported in PCF, but it's recommended to use PingFed. but this is based on Org.'</li> 
+</ul> 
+ <BR>
+<b> Suggestion on Risk</b><BR><BR>
+<ul> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Database TX can be possible in PCF/TAS, need to make sure there is fault tolerance.</li> 
+</ul> 
+ <BR>
+<b> Suggestion on Blocker</b><BR><BR>
+<ul> 
+<li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> EJB application is not recommended in PCF.</li> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> NDM is a blocker in PCF, unless the Org has some utility server, where it will host the NDM agent.</li> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> SFTP is not possible in PCF/TAS.</li> 
 <li style="color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;"> Web Socket might be a blocker, if the PCF doesn't have the support.</li> 

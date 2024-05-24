@@ -31,7 +31,7 @@ public class CodeAnalizerNewTemplate {
 		//         S E C T I O N   F O R   V A R I A B L E S     I N I T I A L I Z A T I O N 
 		//******************************************************************************************
 		String propFilePath = "config\\config.properties";
-		Utility.printStartupBanner();
+		Utility.printStartupBanner1();
         //System.out.println(Utility.readProperties(propFilePath));
 		
         PropertiesReader propertiesReader = new PropertiesReader();
@@ -58,6 +58,16 @@ public class CodeAnalizerNewTemplate {
         	 String[] items = complexityAnalysisExcludeExtension.split(",");
         	 for (String item : items) {
         		 excludeExtensionlist.add(item.trim());
+        	 }
+
+         }
+         
+         List<String> analysisSubCategoryListByUser = new ArrayList<String>();
+         String analysisSubCategoryStringByUser = propertiesReader.getAnalysisSubCategoryListByUser();
+         if (analysisSubCategoryStringByUser != null) {
+        	 String[] items = analysisSubCategoryStringByUser.split(",");
+        	 for (String item : items) {
+        		 analysisSubCategoryListByUser.add(item.trim());
         	 }
 
          }
@@ -222,8 +232,12 @@ public class CodeAnalizerNewTemplate {
 				    AnalysisDocumentSet analysisRulesetSet = gson.fromJson(analysisReader, AnalysisDocumentSet.class);
 				    Utility.printRuleSetForAnalysisConsole(analysisRulesetSet);
 
-				    analysisAndDesignSection = Utility.generateHTMLForAnalaysisAndDesign(analysisRulesetSet.getAnalysisDocSet(), summaryBeans);
-				    //System.out.println(analysisAndDesignSection);
+				    analysisAndDesignSection = Utility.generateHTMLForAnalaysisAndDesignV2(
+															    		analysisSubCategoryListByUser,
+															    		analysisRulesetSet.getAnalysisDocSet(), 
+															    		summaryBeans);
+				    //Section To do the Complexity Analysis
+				    
 		        }
 			    
 		            

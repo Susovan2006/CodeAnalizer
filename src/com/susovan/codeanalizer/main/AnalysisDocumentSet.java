@@ -46,16 +46,22 @@ public class AnalysisDocumentSet {
 	
 	
 	
+	
+
+
+
+
 	@Override
 	public String toString() {
 		return "AnalysisDocumentSet [analysisDocVersionNo=" + analysisDocVersionNo + ", analysisDocAuthor="
 				+ analysisDocAuthor + ", analysisDocLastUpdateDate=" + analysisDocLastUpdateDate
-				+ ", analysisDocDescription=" + analysisDocDescription + ", analysisDocSet=" + analysisDocSet
-				+ ", getAnalysisDocVersionNo()=" + getAnalysisDocVersionNo() + ", getAnalysisDocAuthor()="
-				+ getAnalysisDocAuthor() + ", getAnalysisDocLastUpdateDate()=" + getAnalysisDocLastUpdateDate()
-				+ ", getAnalysisDocDescription()=" + getAnalysisDocDescription() + ", getAnalysisDocSet()="
-				+ getAnalysisDocSet() + "]";
+				+ ", analysisDocDescription=" + analysisDocDescription + ", analysisDocSet=" + analysisDocSet + "]";
 	}
+
+
+
+
+
 
 
 
@@ -63,8 +69,9 @@ public class AnalysisDocumentSet {
 	public static class Analysis {
         private int analysisNo;
         private boolean isAnalysisDisplayEnabled;
+        float complexityScore;
         private String analysisTechKey;
-        private String analysisTechDesc;
+        private String analysisCategory;
         private String analysisTechSuggestion;
 		public int getAnalysisNo() {
 			return analysisNo;
@@ -84,24 +91,34 @@ public class AnalysisDocumentSet {
 		public void setAnalysisTechKey(String analysisTechKey) {
 			this.analysisTechKey = analysisTechKey;
 		}
-		public String getAnalysisTechDesc() {
-			return analysisTechDesc;
-		}
-		public void setAnalysisTechDesc(String analysisTechDesc) {
-			this.analysisTechDesc = analysisTechDesc;
-		}
+
 		public String getAnalysisTechSuggestion() {
 			return analysisTechSuggestion;
 		}
 		public void setAnalysisTechSuggestion(String analysisTechSuggestion) {
 			this.analysisTechSuggestion = analysisTechSuggestion;
 		}
+		public float getComplexityScore() {
+			return complexityScore;
+		}
+		public void setComplexityScore(float complexityScore) {
+			this.complexityScore = complexityScore;
+		}
+		public String getAnalysisCategory() {
+			return analysisCategory;
+		}
+		public void setAnalysisCategory(String analysisCategory) {
+			this.analysisCategory = analysisCategory;
+		}
 		@Override
 		public String toString() {
 			return "Analysis [analysisNo=" + analysisNo + ", isAnalysisDisplayEnabled=" + isAnalysisDisplayEnabled
-					+ ", analysisTechKey=" + analysisTechKey + ", analysisTechDesc=" + analysisTechDesc
-					+ ", analysisTechSuggestion=" + analysisTechSuggestion + "]";
+					+ ", complexityScore=" + complexityScore + ", analysisTechKey=" + analysisTechKey
+					+ ", analysisCategory=" + analysisCategory + ", analysisTechSuggestion=" + analysisTechSuggestion
+					+ "]";
 		}
+		
+		
 
         
     }

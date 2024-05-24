@@ -21,6 +21,8 @@ public class PropertiesReader {
     private String isAnalysisAndDesignSectionEnabled;
     private String pathForAnalysisAndDesignTemplate;
     
+    private String analysisSubCategoryListByUser;
+    
     
     // Add more keys as needed
 
@@ -49,6 +51,7 @@ public class PropertiesReader {
             complexityCriteria = prop.getProperty("complexity.criteria");
             isAnalysisAndDesignSectionEnabled = prop.getProperty("is.code.analysis.design.enabled");
             pathForAnalysisAndDesignTemplate = prop.getProperty("analysis.design.template.file.location");
+            analysisSubCategoryListByUser = prop.getProperty("analysis.subsection.to.display");
             
             
             
@@ -129,6 +132,14 @@ public class PropertiesReader {
 
 	public void setPathForAnalysisAndDesignTemplate(String pathForAnalysisAndDesignTemplate) {
 		this.pathForAnalysisAndDesignTemplate = pathForAnalysisAndDesignTemplate;
+	}
+
+	public String getAnalysisSubCategoryListByUser() {
+		return analysisSubCategoryListByUser;
+	}
+
+	public void setAnalysisSubCategoryListByUser(String analysisSubCategoryListByUser) {
+		this.analysisSubCategoryListByUser = analysisSubCategoryListByUser;
 	}
 
 	
