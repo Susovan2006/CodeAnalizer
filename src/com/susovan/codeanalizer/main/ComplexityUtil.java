@@ -11,7 +11,7 @@ import com.susovan.codeanalizer.main.LineCounter.FileData;
 public class ComplexityUtil {
 
     public static String getComplexity(String input, List<FileData> list) {
-    	int total=0;
+    	double total=0;
     	if (!list.isEmpty()) {
     		FileData lastFileData = list.get(list.size() - 1);
     		total = lastFileData.getLineCount();
@@ -47,7 +47,7 @@ class Range {
         this.end = end;
     }
 
-    public boolean isInRange(int number) {
+    public boolean isInRange(double number) {
         return number >= start && number <= end;
     }
 

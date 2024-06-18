@@ -4,6 +4,7 @@ public class SummaryBean {
 	
 	String ruleType;
 	int countMatch;
+	int ruleId;
 	boolean alert;
 	
 	
@@ -25,6 +26,13 @@ public class SummaryBean {
 	public void setAlert(boolean alert) {
 		this.alert = alert;
 	}
+	public int getRuleId() {
+		return ruleId;
+	}
+	public void setRuleId(int ruleId) {
+		this.ruleId = ruleId;
+	}
+	
 	
 	
 	

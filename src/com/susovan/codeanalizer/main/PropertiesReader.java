@@ -9,6 +9,9 @@ import java.util.Properties;
 
 public class PropertiesReader {
     private String applicationName;
+    private String consoleInputMode;
+    private boolean isConsoleInputModeOn;
+    
     private String projectScanDirectory;
     private String outputReportGenPath;
     private String rulesetFile;
@@ -16,6 +19,7 @@ public class PropertiesReader {
     private String isComplexityAnalysisEnabled;
     private String complexityAnalysisExcludeExtension;
     private String complexityCriteria;
+    private String allowBlankLines;
     //private 
     
     private String isAnalysisAndDesignSectionEnabled;
@@ -49,9 +53,12 @@ public class PropertiesReader {
             isComplexityAnalysisEnabled = prop.getProperty("is.code.complexity.analysis.enabled");
             complexityAnalysisExcludeExtension = prop.getProperty("code.complexity.analysis.exclude.extensions");
             complexityCriteria = prop.getProperty("complexity.criteria");
+            allowBlankLines = prop.getProperty("allow.blanklines.in.line.count");
             isAnalysisAndDesignSectionEnabled = prop.getProperty("is.code.analysis.design.enabled");
             pathForAnalysisAndDesignTemplate = prop.getProperty("analysis.design.template.file.location");
             analysisSubCategoryListByUser = prop.getProperty("analysis.subsection.to.display");
+            consoleInputMode = prop.getProperty("is.console.input.mode.on");
+            
             
             
             
@@ -141,6 +148,36 @@ public class PropertiesReader {
 	public void setAnalysisSubCategoryListByUser(String analysisSubCategoryListByUser) {
 		this.analysisSubCategoryListByUser = analysisSubCategoryListByUser;
 	}
+
+	public String getAllowBlankLines() {
+		return allowBlankLines;
+	}
+
+	public void setAllowBlankLines(String allowBlankLines) {
+		this.allowBlankLines = allowBlankLines;
+	}
+
+	public boolean isConsoleInputModeOn() {
+		return stringToBooleanConsoleMode(consoleInputMode);
+	}
+
+	public void setConsoleInputModeOn(boolean isConsoleInputModeOn) {
+		this.isConsoleInputModeOn = isConsoleInputModeOn;
+	}
+	
+	
+	
+	private static boolean stringToBooleanConsoleMode(String str) {
+        if (str == null || str.trim().isEmpty()) {
+            return false;
+        }else if(str.equalsIgnoreCase("true")) {
+        	return true;
+        }else if(str.equalsIgnoreCase("false")) {
+        	return false;
+        }else {
+        	return true;
+        }
+    }
 
 	
 	

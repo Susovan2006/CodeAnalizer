@@ -440,12 +440,15 @@
 	<p style="color:green; font-size:20px; font-family:Courier;"> Disposition Analysis for Trust Store </p> 
 	</button> 
 <div class="content"> 
- <BR><table id="customers"> 
-  <tr>
-    <th>Category</th>
-    <th>Complexity Score</th>
-    <th>Count</th>
-  </tr><tr>
+ <BR> <table>
+	<tr>
+		<td> 
+         <table id="customers"> 
+           <tr>
+             <th>Category</th>
+             <th>Complexity Score</th>
+             <th>Count</th>
+           </tr><tr>
   <td>General</td>
   <td>0.0</td>
   <td>9</td>
@@ -470,7 +473,43 @@
   <td>21.0</td>
   <td>7</td>
 </tr>
-</table></div><button class="collapsible">
+</table> </td><td> 		<div class="pie-chart"></div>		<div class="legend">			<div>				<span class="red"></span>Refactor : 32%			</div>			<div>				<span class="green"></span>ReWrite : 62%			</div>		</div></td></tr></Table></div><style>
+        .pie-chart {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #e3b0b0 0% 32% 
+                #b1edb1 32% 62%
+            );
+        }
+
+        .legend {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .legend div {
+            display: flex;
+            align-items: center;
+        }
+
+        .legend span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .red {
+            background: #e3b0b0;
+        }
+
+        .green {
+            background: #b1edb1;
+        }
+    </style><button class="collapsible">
 	<p style="color:black; font-size:20px; font-family:Courier;"> Rule No : 1:Search if the application is a SpringBoot App </p> 
 	</button> 
 <div class="content"> 

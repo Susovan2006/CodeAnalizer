@@ -11,6 +11,7 @@ public class Rule {
     private List<String> listOfSearchString;
     private List<String> listOfSearchRegex;
     private List<String> listOfSearchFilePattern;
+    private List<String> listOfExcludedFilePatterns;
     private boolean isAlertEnabled;
     
     
@@ -71,6 +72,12 @@ public class Rule {
 	}
 	public void setRuleEnabled(boolean isRuleEnabled) {
 		this.isRuleEnabled = isRuleEnabled;
+	}
+	public List<String> getListOfExcludedFilePatterns() {
+		return listOfExcludedFilePatterns;
+	}
+	public void setListOfExcludedFilePatterns(List<String> listOfExcludedFilePatterns) {
+		this.listOfExcludedFilePatterns = listOfExcludedFilePatterns;
 	}
 
 	

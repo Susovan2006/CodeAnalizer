@@ -13,6 +13,7 @@
             "listOfSearchString": ["@SpringBootApplication","org.springframework.boot"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": ["application*.properties"],
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": true
         },
         {
@@ -24,6 +25,7 @@
             "listOfSearchString": ["spring-webmvc","WebApplicationContext","DispatcherServlet"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -35,6 +37,7 @@
             "listOfSearchString": ["javax.ejb"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -46,6 +49,7 @@
             "listOfSearchString": ["javax.servlet"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -57,6 +61,7 @@
             "listOfSearchString": ["com.ibm.websphere","com.ibm.ws","WAS_HOME","websphere.application.name"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -68,6 +73,7 @@
             "listOfSearchString": ["org.jboss","jboss.server"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -79,6 +85,7 @@
             "listOfSearchString": ["org.apache.catalina","org.apache.tomcat"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -90,6 +97,7 @@
             "listOfSearchString": ["weblogic","jndi.WLInitialContextFactory"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -101,6 +109,7 @@
             "listOfSearchString": ["ibm.db2","DB2DataSource","DB2Connection","db2jcc"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -112,6 +121,7 @@
             "listOfSearchString": ["oracle.jdbc.OracleDriver","jdbc:oracle"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -123,6 +133,7 @@
             "listOfSearchString": ["TeradataDataSource","TeradataConnection","terajdbc4","teradata"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -134,6 +145,7 @@
             "listOfSearchString": ["rollback","setAutoCommit","commit","@Transactional","TransactionManager","UserTransaction"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -145,6 +157,7 @@
             "listOfSearchString": ["org.hibernate","SessionFactory","hibernate-core"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -156,6 +169,7 @@
             "listOfSearchString": ["javax.naming.InitialContext","java:comp/env","javax.sql.DataSource"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": true
         },
         {
@@ -167,6 +181,7 @@
             "listOfSearchString": ["org.apache.kafka","KafkaProducer","KafkaConsumer","kafka-clients"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -178,6 +193,7 @@
             "listOfSearchString": ["com.ibm.mq","MQQueue","MQTopic","MQQueueManager","mq-jms-spring-boot-starter","jms"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -189,6 +205,7 @@
             "listOfSearchString": ["org.apache.axis","wsdl2java"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -200,6 +217,7 @@
             "listOfSearchString": ["org.apache.cxf","cxf-rt-frontend-jaxws"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -211,6 +229,7 @@
             "listOfSearchString": ["@RestController","@RequestMapping","@GetMapping","@PostMapping","RestTemplate","javax.ws.rs"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -222,6 +241,7 @@
             "listOfSearchString": ["@EnableBatchProcessing","org.springframework.batch.core","StepBuilderFactory","JobBuilderFactory"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -233,6 +253,7 @@
             "listOfSearchString": ["@Scheduled","CronTrigger","org.quartz","CronScheduleBuilder","ScheduledTaskRegistrar"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -244,6 +265,7 @@
             "listOfSearchString": ["insert_job","Autosys"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -255,6 +277,7 @@
             "listOfSearchString": ["MultipartFile","FileInputStream","FileOutputStream","java.nio.file.Files","file.transferTo"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -266,6 +289,7 @@
             "listOfSearchString": ["org.apache.poi","HSSFWorkbook","XSSFWorkbook","HSSFSheet","XSSFSheet"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -277,6 +301,7 @@
             "listOfSearchString": ["com.itextpdf","PdfWriter","org.apache.pdfbox","net.sf.jasperreports","PDDocument"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -288,6 +313,7 @@
             "listOfSearchString": ["javax.mail","mail.smtp.host","mail.smtp.port","JavaMailSender","MimeMessage"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -299,6 +325,7 @@
             "listOfSearchString": ["redis.clients.jedis","io.lettuce","RedisTemplate","@EnableCaching","Jedis"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -310,6 +337,7 @@
             "listOfSearchString": ["net.sf.ehcache","EhCacheCacheManager"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -321,6 +349,7 @@
             "listOfSearchString": ["com.venafi","KeyStore","CertStore","VcertClient","CertificateRequest","EnrollmentTransaction"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -332,6 +361,7 @@
             "listOfSearchString": ["com.pingidentity","PingFederate"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -343,6 +373,7 @@
             "listOfSearchString": ["com.netegrity.siteminder","SMSESSION"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -354,6 +385,7 @@
             "listOfSearchString": ["com.ibm.connect.direct","NetDataMover","NDMFileTransfer","NDMConnection","NDMSession"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -365,6 +397,7 @@
             "listOfSearchString": ["com.jcraft.jsch","ChannelSftp","org.apache.commons.net.ftp.FTPSClient","JSch"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         },
         {
@@ -376,6 +409,7 @@
             "listOfSearchString": ["javax.websocket","org.eclipse.jetty.websocket","org.springframework.web.socket","@ServerEndpoint","@ClientEndpoint","WebSocketHandler"],
             "listOfSearchRegex": null,
             "listOfSearchFilePattern": null,
+            "listOfExcludedFilePatterns" : null,
             "isAlertEnabled": false
         }
     ]

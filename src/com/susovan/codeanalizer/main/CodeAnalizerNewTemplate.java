@@ -13,10 +13,12 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.google.gson.Gson;
+import com.susovan.codeanalizer.main.AnalysisDocumentSet.Analysis;
 import com.susovan.codeanalizer.main.LineCounter.FileData;
 
 
@@ -31,22 +33,69 @@ public class CodeAnalizerNewTemplate {
 		//         S E C T I O N   F O R   V A R I A B L E S     I N I T I A L I Z A T I O N 
 		//******************************************************************************************
 		String propFilePath = "config\\config.properties";
+		String complexity = "unknown";
 		Utility.printStartupBanner1();
         //System.out.println(Utility.readProperties(propFilePath));
 		
         PropertiesReader propertiesReader = new PropertiesReader();
         propertiesReader.readProperties(propFilePath);
+        String applicationName;
+        String projectScanDirectory;
+        String outputReportGenPath;
         
-         String applicationName = propertiesReader.getApplicationName();
-         String projectScanDirectory = propertiesReader.getProjectScanDirectory();
-         String outputReportGenPath = propertiesReader.getOutputReportGenPath();
+         boolean isConsoleInputModeOn = propertiesReader.isConsoleInputModeOn();
+         if(isConsoleInputModeOn) {
+        	 Scanner scanner = new Scanner(System.in);
+
+             System.out.println("Starting the Code Analysis in Console Mode, here you will have can put the input dynamically");
+             
+             //Collecting the App Name
+             while (true) {
+            	 System.out.println("Put the name of the Application you would like to Scan :");
+                 String input = scanner.nextLine();
+
+                 if (Utility.isValidAppName(input)) {
+                	 applicationName = input;
+                     break;
+                 } else {
+                     //System.out.println("The App Name is Invalid, App name can't be Blank. It should only have Alphanumeric values..");
+                 }
+             }
+             
+             
+             
+             while (true) {
+            	 System.out.println("Provide the base dir where you have the code base :");
+            	 //System.out.println("Note: provide the complete path like C:/<Folder>/<Sub Folder>/");
+                 String input = scanner.nextLine();
+
+                 if (Utility.isValidProjectDir(input)) {
+                	 projectScanDirectory = input;
+                     break;
+                 } else {
+                     //System.out.println("Please Re-enter.....");
+                 }
+             }
+             
+             outputReportGenPath="Report\\"+applicationName+"_CodeAnalysisReport.html";
+             scanner.close();
+             
+         }else {
+        	 applicationName = propertiesReader.getApplicationName();
+        	 projectScanDirectory = propertiesReader.getProjectScanDirectory();
+        	 outputReportGenPath = propertiesReader.getOutputReportGenPath();
+         }
+        
+         
+         
+
          String rulesetFile = propertiesReader.getRulesetFile();
         
          //These variables are applicavle for the Code Complexity Analysis.
          String isComplexityAnalysisEnabled = propertiesReader.getIsComplexityAnalysisEnabled();
          String complexityAnalysisExcludeExtension = propertiesReader.getComplexityAnalysisExcludeExtension();
          String complexityCriteria = propertiesReader.getComplexityCriteria();
-         
+         String allowBlankLines = propertiesReader.getAllowBlankLines();
          //Analysis and Design Section
          String isAnalysisAndDesignSectionEnabled = propertiesReader.getIsAnalysisAndDesignSectionEnabled();
          String pathForAnalysisAndDesignTemplate = propertiesReader.getPathForAnalysisAndDesignTemplate();
@@ -89,8 +138,10 @@ public class CodeAnalizerNewTemplate {
 	 		System.out.println("Step 2 --> Extensions collected from the Code.");
 			System.out.println("Step 3 --> Fetching Line Count and File Count, It might take sometime......");
 			
-			List<FileData> counts = LineCounter.countFilesAndLinesByExtension(Paths.get(projectScanDirectory), filteredExtensions);
-			String complexity = ComplexityUtil.getComplexity(complexityCriteria, counts);
+			List<FileData> counts = LineCounter.countFilesAndLinesByExtension(Paths.get(projectScanDirectory), 
+																				filteredExtensions,
+																				Utility.stringToBoolean(allowBlankLines));
+			complexity = ComplexityUtil.getComplexity(complexityCriteria, counts);
 			
 			//This Section Will Generate the Collapsible Section to Display the Complexity Data. Basically this is the Heading.
 			outPutReport.append(Utility.generateHtmlStringComplexityCollapsible(applicationName));
@@ -120,6 +171,7 @@ public class CodeAnalizerNewTemplate {
 	            List<Rule> rules = ruleset.getRuleset();
 		            for (Rule rule : rules) {
 		            	int ruleNo = rule.getRuleNo();
+		            	String ruleType = rule.getRuleType();
 		            	String ruleDescription = rule.getRuleDescription();
 				        if(rule.isRuleEnabled()) {		                
 				             boolean isAlertEnabled = rule.isAlertEnabled();
@@ -128,10 +180,11 @@ public class CodeAnalizerNewTemplate {
 				             List<String> listOfSearchString = rule.getListOfSearchString();
 				             List<String> listOfSearchRegex = rule.getListOfSearchRegex();
 				             List<String> listOfSearchFilePattern = rule.getListOfSearchFilePattern();
+				             List<String> listOfExcludedFilePatterns = rule.getListOfExcludedFilePatterns();
 				             //System.out.println("listOfSearchRegex"+listOfSearchRegex);
 				             System.out.println("Executing Rule "+ruleNo+" -->"+ruleDescription);
 				                try {
-				                    List<String> files = listFiles(projectScanDirectory, listOfFileExtensions);
+				                    List<String> files = filterWithExcludedFilePattern(listFiles(projectScanDirectory, listOfFileExtensions),listOfExcludedFilePatterns);
 				                    
 				                    //In case we have a Matching list of files.
 				                    if(files.size()>0) {
@@ -196,7 +249,7 @@ public class CodeAnalizerNewTemplate {
 					                    }
 				        	            //The summery will be displayed in case there is a match.
 				        	            if(matchCount>0) {
-				        	            	outPutReport.append(Utility.generateHtmlStringRuleDetailsCollapsible(ruleNo,ruleDescription));
+				        	            	outPutReport.append(Utility.generateHtmlStringRuleDetailsCollapsible(ruleNo,ruleDescription,ruleType));
 				        	            	outPutReport.append(Utility.generateHtmlTableHeader());
 				        	            	outPutReport.append(detailReviewData);
 				        	            	
@@ -204,6 +257,7 @@ public class CodeAnalizerNewTemplate {
 				        	            	summaryBean.setRuleType(rule.getRuleType());
 				        	            	summaryBean.setCountMatch(matchCount);
 				        	            	summaryBean.setAlert(isAlertEnabled);
+				        	            	summaryBean.setRuleId(rule.getRuleNo());
 				        	            	summaryBeans.add(summaryBean);
 					    	                
 					    	                outPutReport.append(Utility.generateHtmlTableEndCollapsible());
@@ -223,7 +277,7 @@ public class CodeAnalizerNewTemplate {
 	            //***********************************************************************************
 		        // SECTION FOR A&D SECTION
 		        //***********************************************************************************
-		            String analysisAndDesignSection = "";
+		            StringBuffer analysisAndDesignSection = new StringBuffer();
 		        if(isAnalysisAndDesignSectionEnabled.equals(isAnalysisAndDesignSectionEnabled)) {
 		        	
 		        	Utility.printAnalysisAndDesignConsole();
@@ -232,11 +286,18 @@ public class CodeAnalizerNewTemplate {
 				    AnalysisDocumentSet analysisRulesetSet = gson.fromJson(analysisReader, AnalysisDocumentSet.class);
 				    Utility.printRuleSetForAnalysisConsole(analysisRulesetSet);
 
-				    analysisAndDesignSection = Utility.generateHTMLForAnalaysisAndDesignV2(
+				    analysisAndDesignSection.append(Utility.generateHTMLForAnalaysisAndDesignV2(
 															    		analysisSubCategoryListByUser,
 															    		analysisRulesetSet.getAnalysisDocSet(), 
-															    		summaryBeans);
+															    		summaryBeans));
 				    //Section To do the Complexity Analysis
+				    
+				    List<Analysis> filteredAnalysisList = Utility.filterAnalysisByCategoryAndTechKey(analysisRulesetSet.getAnalysisDocSet(), 
+																								analysisSubCategoryListByUser,
+																							summaryBeans);
+				    //Here we are adding the Disposition Section.				    
+				    analysisAndDesignSection.append(Utility.getDispositionSection(filteredAnalysisList,applicationName, complexity));
+				    //System.out.println(analysisAndDesignSection.toString());
 				    
 		        }
 			    
@@ -251,7 +312,7 @@ public class CodeAnalizerNewTemplate {
                 //String finalReport = Utility.generateFinalReport(summerySection,report);
                 String reportWithComplexitySection = Utility.generateFinalReport(summerySection,report);
                 String finalReport = Utility.generateFinalReportWithAnalysis(reportWithComplexitySection,
-                																analysisAndDesignSection, 
+                																analysisAndDesignSection.toString(), 
                 																isAnalysisAndDesignSectionEnabled);
                 
                 Utility.writeStringBufferToHtmlReport(new StringBuffer(finalReport), outputReportGenPath);
@@ -282,6 +343,39 @@ public class CodeAnalizerNewTemplate {
         });
 
         return files;
+    }
+	
+	//Added 5/28/2024
+	//listOfExcludedFilePatterns
+	public static List<String> filterWithExcludedFilePattern(List<String> filePaths, List<String> excludeFiles) {
+        List<String> filteredFiles = new ArrayList<>();
+        
+        
+        if(excludeFiles!=null && excludeFiles.size() > 0) {
+	        for (String filePath : filePaths) {
+	            String fileName = filePath.substring(filePath.lastIndexOf("\\") + 1).toLowerCase();
+	            boolean exclude = false;
+	
+	            for (String excludeFile : excludeFiles) {
+	                String regex = excludeFile.replace(".", "\\.").replace("*", ".*").toLowerCase();
+	                if (Pattern.compile(regex).matcher(fileName).matches()) {
+	                    exclude = true;
+	                    break;
+	                }
+	            }
+	
+	            if (!exclude) {
+	                filteredFiles.add(filePath);
+	            }else {
+	            	//System.out.println("******Skipped-->"+filePath);
+	            }
+	        }
+	        return filteredFiles;
+        }else {
+        	return filePaths;
+        }
+
+        
     }
 	
 	public static List<String> searchInFile(String fileName, List<String> searchStrings) throws IOException {

@@ -8,6 +8,10 @@ import java.util.Locale;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -177,6 +181,37 @@ public class Utility {
         		"  background-color: #04AA6D;\r\n" + 
         		"  color: white;\r\n" + 
         		"} \r\n"+
+        		".legend {\r\n" + 
+        		"            margin-top: 20px;\r\n" + 
+        		"            display: flex;\r\n" + 
+        		"            justify-content: space-between;\r\n" + 
+        		"        }\r\n" + 
+        		"\r\n" + 
+        		"        .legend div {\r\n" + 
+        		"            display: flex;\r\n" + 
+        		"            align-items: center;\r\n" + 
+        		"        }\r\n" + 
+        		"\r\n" + 
+        		"        .legend span {\r\n" + 
+        		"            display: inline-block;\r\n" + 
+        		"            width: 20px;\r\n" + 
+        		"            height: 20px;\r\n" + 
+        		"            margin-right: 10px;\r\n" + 
+        		"        }\r\n" + 
+        		"\r\n" + 
+        		"        .red {\r\n" + 
+        		"            background: #e3b0b0;\r\n" + 
+        		"        }\r\n" + 
+        		"\r\n" + 
+        		"        .green {\r\n" + 
+        		"            background: #b1edb1;\r\n" + 
+        		"        }"+
+        		"footer {\r\n" + 
+        		"		  text-align: center;\r\n" + 
+        		"		  padding: 3px;\r\n" + 
+        		"		  background-color: gray;\r\n" + 
+        		"		  color: white;\r\n" + 
+        		"		}\r\n"+
         		"    </style>\r\n" + 
         		"\r\n" + 
         		"</head>\r\n";
@@ -203,35 +238,56 @@ public class Utility {
 	public static String generateSummery(List<SummaryBean> summaryBeanList) {
 		StringBuffer summary = new StringBuffer();
 		for (SummaryBean summaryBean : summaryBeanList) {
-			summary.append(generateHtmlStringSummeryDiv(summaryBean.getRuleType(),summaryBean.getCountMatch(), summaryBean.isAlert()));
+			summary.append(generateHtmlStringSummeryDiv(summaryBean.getRuleType(),
+														summaryBean.getCountMatch(), 
+														summaryBean.isAlert(),
+														summaryBean.getRuleId()));
         }
 		return summary.toString();
 	}
 	
-	public static String generateHtmlStringSummeryDiv(String ruleType, int countMatch, boolean alert) {
+	public static String generateHtmlStringSummeryDiv(String ruleType, int countMatch, boolean alert, int ruleId) {
 		String htmlString;
 		if(alert) {
-			htmlString = "<div class=\"alert from\">\r\n" + 
-					"        <div class=\"alertPanel\">"+ruleType+"</div>\r\n" + 
+			htmlString = 
+					"<div class=\"alert from\">\r\n" + 
+					"        <div class=\"alertPanel\"> \r\n"+
+					"			<a href=\"#"+ruleId+"\" \r\n" + 
+					"               style=\"text-decoration: none;\" \r\n "+
+					"               onclick=\"document.getElementById('"+ruleId+"').focus(); \r\n"+
+					"				document.getElementById('"+ruleId+"').click(); \r\n" +
+					"				return false;\">" +ruleType+"\r\n"+
+					"			</a>\r\n"+
+					"</div>\r\n" + 
 					"        <div class=\"fromtocontent\">\r\n" + 
 					"            <span>"+countMatch+"</span><br />\r\n" + 
 					"        </div>\r\n" + 
 					"    </div>\r\n";
+					
 		}else {
-			htmlString = "<div class=\"fromto from\">\r\n" + 
-					"        <div class=\"generalPanel\">"+ruleType+"</div>\r\n" + 
+			htmlString = 
+					"<div class=\"fromto from\">\r\n" + 
+					"        <div class=\"generalPanel\">"+
+					"			<a href=\"#"+ruleId+"\" \r\n" + 
+					"               style=\"text-decoration: none;\" \r\n "+
+					"               onclick=\"document.getElementById('"+ruleId+"').focus(); \r\n"+
+					"				document.getElementById('"+ruleId+"').click(); \r\n" +
+					"				return false;\">" +ruleType+"\r\n"+
+					"			</a>\r\n"+
+					"</div>\r\n" + 
 					"        <div class=\"fromtocontent\">\r\n" + 
 					"            <span>"+countMatch+"</span><br />\r\n" + 
 					"        </div>\r\n" + 
 					"    </div>\r\n";
+					
 		}
 		
 		return htmlString;
 	}
 	
 	
-	public static String generateHtmlStringRuleDetailsCollapsible(int ruleNo, String RuleDetails) {
-		String htmlString = "<button class=\"collapsible\">\r\n" + 
+	public static String generateHtmlStringRuleDetailsCollapsible(int ruleNo, String RuleDetails, String ruleType) {
+		String htmlString = "<button class=\"collapsible\"   id=\""+ruleNo+"\">\r\n" + 
 				"	<p style=\"color:black; font-size:20px; font-family:Courier;\"> "
 				+ "Rule No : "+ruleNo+":"+RuleDetails+" </p> \r\n"+
 				"	</button> \r\n"
@@ -299,6 +355,10 @@ public class Utility {
 				"  });\r\n" + 
 				"}\r\n" + 
 				"</script>"+
+				"<footer>\r\n" + 
+				"  <p>Author: Susovan Gumtya | \r\n" + 
+				"  <a href=\"mailto:susovan2006@gmail.com\">susovan2006@gmail.com</a></p>\r\n" + 
+				"</footer>\r\n"+
 				"</body>\r\n" + 
 				"</html>";
 		return htmlString;
@@ -430,11 +490,11 @@ public class Utility {
 				"<b>The Complixity of the Project is : <font color='red'>"+complexityValue+"</font></b>"+
 				"<BR><BR>";
 	}
-	public static String formatNumberWithCommas(int number) {
+	public static String formatNumberWithCommas(long number) {
 		return NumberFormat.getNumberInstance(Locale.US).format(number);
     }
 	
-	public static String formatNumberWithKSuffix(int number) {
+	public static String formatNumberWithKSuffix(long number) {
         if (number < 1000) {
             return String.valueOf(number);
         }
@@ -617,15 +677,11 @@ public class Utility {
 															List<Analysis> analysisDocSet,
 															List<SummaryBean> summaryBeans) {
 		
-		//Here We are Extracting only the Matched RuleSet.
-		List<String> matchedRulesSetList = new ArrayList<>();
-		for (SummaryBean summeryBean : summaryBeans) {
-			matchedRulesSetList.add(summeryBean.getRuleType());
-		}
+		
 		
 		List<Analysis> filteredAnalysisList = filterAnalysisByCategoryAndTechKey(analysisDocSet, 
 																				analysisSubCategoryListByUser,
-																				matchedRulesSetList);
+																				summaryBeans);
 		
 		System.out.println("Actual Analysis List Size =>"+analysisDocSet.size());
 		System.out.println("Filtered List Size =>"+filteredAnalysisList.size());
@@ -640,10 +696,18 @@ public class Utility {
 	// e.g. Spring Boot, Spring MVC, EJB etc.
 	public static List<Analysis> filterAnalysisByCategoryAndTechKey(List<Analysis> analysisList, 
 																	List<String> categories, 
-																	List<String> techKeys) {
-        List<Analysis> filteredList = new ArrayList<>();
+																	List<SummaryBean> summaryBeans) {
+        
+		//Here We are Extracting only the Matched RuleSet.
+		List<String> matchedRulesSetList = new ArrayList<>();
+			for (SummaryBean summeryBean : summaryBeans) {
+			matchedRulesSetList.add(summeryBean.getRuleType());
+		}
+		
+		List<Analysis> filteredList = new ArrayList<>();
         for (Analysis analysis : analysisList) {
-            if (categories.contains(analysis.getAnalysisCategory()) && techKeys.contains(analysis.getAnalysisTechKey())) {
+            if (categories.contains(analysis.getAnalysisCategory()) 
+            		&& matchedRulesSetList.contains(analysis.getAnalysisTechKey())) {
                 filteredList.add(analysis);
             }
         }
@@ -682,7 +746,8 @@ public class Utility {
 			sb.append("<b> Suggestion on "+toCamelCase(entry.getKey())+"</b><BR><BR>\r\n");
 			sb.append("<ul> \r\n");
 	        for (Analysis analysis : entry.getValue()) {
-	        	sb.append("<li style=\"color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;\"> "+analysis.getAnalysisTechSuggestion()+"</li> \r\n");
+	        	sb.append("<li style=\"color:#303030; font-size:15px; font-family:Arial, Helvetica, sans-serif;\"> "
+	        					+highlightKeyword(analysis.getAnalysisTechSuggestion(),analysis.getAnalysisTechKey())+"</li> \r\n");
 	        }
 	        sb.append("</ul> \r\n");
 	    }		
@@ -691,6 +756,11 @@ public class Utility {
 		return sb.toString();
 	}
     
+       private static String highlightKeyword(String text, String keyword) {
+           String regex = "(?i)" + keyword; // (?i) makes the regex case-insensitive
+           String replacement = "<u><i>" + keyword + "</i></u>";
+           return text.replaceAll(regex, replacement);
+       }
 	
        public static String toCamelCase(String s) {
            String[] parts = s.split(" ");
@@ -704,5 +774,244 @@ public class Utility {
            }
            return camelCaseString.toString();
        }
+
+
+    //Code Done On 24/May/2024
+    // Disposition Calculation
+	public static String getDispositionSection(List<Analysis> filteredAnalysisList, String appname, String complexity) {
+		
+		StringBuffer dispositionType = new StringBuffer();
+		dispositionType.append(generateHtmlStringDispositionCollapsible(appname));
+		dispositionType.append(generateHtmlStringTableHeaderDisposition());
+		
+		//Here we are calculate the %for refactor and %of rewrite.
+		Map<String, Integer> percentageCalculation = calculatePercentages(summarizeAnalysis(filteredAnalysisList));
+		
+		//Here we are generating the HTML Table that contains the data and the Pie Graph
+		dispositionType.append(createTableRowsDisposition(summarizeAnalysis(filteredAnalysisList), 
+																		percentageCalculation,
+																		complexity));
+
+		return dispositionType.toString();
+	}
+       
+	
+
+	/**
+	 * Here we are calculating the AnalysisDispositionSummary bean
+	 * @param analysisList
+	 * @return
+	 */
+	public static List<AnalysisDispositionSummary> summarizeAnalysis(List<Analysis> analysisList) {
+	    Map<String, AnalysisDispositionSummary> summaryMap = new HashMap<>();
+
+	    for (Analysis analysis : analysisList) {
+	        String category = analysis.getAnalysisCategory();
+	        AnalysisDispositionSummary summary = summaryMap.get(category);
+	        if (summary == null) {
+	            summary = new AnalysisDispositionSummary();
+	            summary.setAnalysisCategory(category);
+	            summaryMap.put(category, summary);
+	        }
+
+	        summary.setTotalComplexityScore(summary.getTotalComplexityScore() + analysis.getComplexityScore());
+	        if (analysis.getAnalysisTechSuggestion() != null) {
+	            summary.setCountOfAnalysisTechSuggestion(summary.getCountOfAnalysisTechSuggestion() + 1);
+	        }
+	    }
+
+	    for (AnalysisDispositionSummary summary : summaryMap.values()) {
+	        summary.setAverageComplexityScore(summary.getTotalComplexityScore() / summary.getCountOfAnalysisTechSuggestion());
+	    }
+
+	    return new ArrayList<>(summaryMap.values());
+	}  
+       
+	
+	
+	
+	public static Map<String, Integer> calculatePercentages(List<AnalysisDispositionSummary> summaryList) {
+		AnalysisDispositionSummary rewriteSummary = null;
+		AnalysisDispositionSummary refactorSummary = null;
+		
+		Map<String, Integer> percentages = new HashMap<>();
+
+	    for (AnalysisDispositionSummary summary : summaryList) {
+	        if (Constants.REWRITE.equals(summary.getAnalysisCategory())) {
+	            rewriteSummary = summary;
+	        } else if (Constants.REFACTOR.equals(summary.getAnalysisCategory())) {
+	            refactorSummary = summary;
+	        }
+	    }
+	    
+	    if(rewriteSummary == null && refactorSummary != null) {
+	    	percentages.put(Constants.REWRITE, 1);
+		    percentages.put(Constants.REFACTOR, 99);
+	    	
+	    }else if(rewriteSummary != null && refactorSummary == null) {
+	    	percentages.put(Constants.REWRITE, 99);
+		    percentages.put(Constants.REFACTOR, 1);
+	    	
+	    }else if(rewriteSummary == null || refactorSummary == null) {
+	        //throw new IllegalArgumentException("Both 'rewrite' and 'refactor' categories must be present in the list");
+	    	percentages.put(Constants.REWRITE, 1);
+		    percentages.put(Constants.REFACTOR, 99);
+	    }else {
+
+		    double total = (rewriteSummary.getCountOfAnalysisTechSuggestion() * rewriteSummary.getTotalComplexityScore()* Constants.REWRITE_WEIGHT) 
+		                 + (refactorSummary.getCountOfAnalysisTechSuggestion() * refactorSummary.getTotalComplexityScore());
+	
+		    int rewritePercentage = (int) (((rewriteSummary.getTotalComplexityScore() * rewriteSummary.getCountOfAnalysisTechSuggestion()*Constants.REWRITE_WEIGHT) * 100) / total);
+		    int refactorPercentage = (int) (((refactorSummary.getTotalComplexityScore() * refactorSummary.getCountOfAnalysisTechSuggestion()) * 100) / total);
+	
+		    
+		    percentages.put(Constants.REWRITE, rewritePercentage);
+		    percentages.put(Constants.REFACTOR, refactorPercentage);
+	    }
+	    return percentages;
+	}
+    
+	
+	public static String generateHtmlStringDispositionCollapsible(String appName) {
+		String htmlString = "<button class=\"collapsible\">\r\n" + 
+				"	<p style=\"color:green; font-size:20px; font-family:Courier;\"> "
+				+ "Disposition Analysis for "+appName+" </p> \r\n"+
+				"	</button> \r\n"
+				+"<div class=\"content\"> \r\n <BR>";
+				//+ "<section class=\"items\"> \r\n";
+		return htmlString;
+	}
+	
+	public static String generateHtmlStringTableHeaderDisposition() {
+		String htmlString =
+				" <table>\r\n" + 
+				"	<tr>\r\n" + 
+				"		<td> \r\n"+
+				"         <table id=\"customers\"> \r\n"+
+				"           <tr>\r\n" + 
+				"             <th>Category</th>\r\n" + 
+				"             <th>Complexity Score</th>\r\n" + 
+				"             <th>Count</th>\r\n" + 
+				"           </tr>";
+		return htmlString;
+	}
+	
+	public static String createTableRowsDisposition(List<AnalysisDispositionSummary> analysisDispositionSummaryList,
+															Map<String, Integer> percentageCalculation,
+															String complexity) {
+        StringBuilder sb = new StringBuilder();
+
+        for (AnalysisDispositionSummary analysisDispositionSummary : analysisDispositionSummaryList) {
+            sb.append("<tr>\n");
+            sb.append("  <td>").append(toCamelCase(analysisDispositionSummary.getAnalysisCategory())).append("</td>\n");
+            sb.append("  <td>").append((analysisDispositionSummary.getTotalComplexityScore())).append("</td>\n");
+            sb.append("  <td>").append((analysisDispositionSummary.getCountOfAnalysisTechSuggestion())).append("</td>\n");
+            sb.append("</tr>\n");
+        }
+        sb.append("</table>\n");       
+        sb.append(" </td> \n");
+        
+        //Graph Section
+        sb.append("<td> \n");
+        sb.append("		<div class=\"pie-chart\"></div>  \n");
+        sb.append("		<div class=\"legend\"> \n");
+        sb.append("			<div>");
+        sb.append("				<span class=\"green\"></span>Refactor : "+percentageCalculation.get("refactor")+"% \n");
+        sb.append("			</div> \n");
+        sb.append("			<div> \n");
+        sb.append("				<span class=\"red\"></span>ReWrite : "+(100 - percentageCalculation.get("refactor"))+"% \n");
+        sb.append("			</div> \n");
+        sb.append("		</div> \n");
+		sb.append("</td> \n");
+		sb.append("</tr> \n");
+		sb.append("</Table> \n");
+		sb.append(Utility.addComplexityWithRewriteToHtmlReport(complexity, percentageCalculation));
+		sb.append(addCssforGraph(percentageCalculation));
+		
+        sb.append("</div>");
+
+        return sb.toString();
+    }
+	
+	
+	private static String addCssforGraph(Map<String, Integer> percentageCalculation) {
+		String graphCss= "<style>\r\n" + 
+				"        .pie-chart {\r\n" + 
+				"            width: 200px;\r\n" + 
+				"            height: 200px;\r\n" + 
+				"            border-radius: 50%;\r\n" + 
+				"            background: conic-gradient(\r\n" + 
+				"                #e3b0b0 0% "+percentageCalculation.get(Constants.REWRITE)+"% ,\r\n" + 
+				"                #b1edb1 "+percentageCalculation.get(Constants.REWRITE)+"% " +percentageCalculation.get(Constants.REFACTOR)+"%\r\n" + 
+				"            );\r\n" + 
+				"        }\r\n" + 
+				"    </style>";
+		System.out.println(graphCss);
+		return graphCss;
+	}
+	
+	public static String addComplexityWithRewriteToHtmlReport(String complexityValue, Map<String, Integer> percentageCalculation) {
+		return "\r\n" + 
+				"<BR><BR><BR> <b>The Disposition of the Project is : <font color='Green'>"+complexityValue+ ":</font>"
+				+percentageCalculation.get(Constants.REFACTOR)+"% Refactor &  "
+				+(100-percentageCalculation.get(Constants.REFACTOR))+"% Rewrite </b>"+
+				"<BR><BR>";
+	}
+	
+	 public static boolean stringToBoolean(String str) {
+	        if (str == null || str.trim().isEmpty()) {
+	            return true;
+	        }else if(str.equalsIgnoreCase("true")) {
+	        	return true;
+	        }else if(str.equalsIgnoreCase("false")) {
+	        	return false;
+	        }else {
+	        	return true;
+	        }
+	    }
+
+
+	public static boolean isValidAppName(String input) {
+		if(input != null && input.trim().isEmpty()) {
+			System.out.println("The Project Name, can't be blank..");
+			return false;
+		}else if(!isValidFileName(input)) {
+			System.out.println("Invalid Name, only Alphanumeric Values allowed.");
+			return false;
+		}else {
+			return true;
+		}
+	}
+
+
+	public static boolean isValidProjectDir(String input) {
+		if(input != null && input.trim().isEmpty()) {
+			System.out.println("The Project scan Dir, can't be blank..");
+			return false;
+		}else if(!isValidFolder(input)) {
+			System.out.println("Invalid Path, Revalidate the Path, looks like the folder doesn't exists");
+			return false;
+		}else {
+			return true;
+		}
+		
+	}
+	
+	private static boolean isValidFolder(String path) {
+		try {
+            Path p = Paths.get(path);
+            return Files.exists(p) && Files.isDirectory(p);
+        } catch (InvalidPathException e) {
+            return false;
+        }
+	}
+	
+	public static boolean isValidFileName(String fileName) {
+        // Regular expression to check valid filename
+        String regex = "^[^.\\\\/:*?\"<>|]?[^\\\\/:*?\"<>|]*" 
+                     + "(?:\\.(?![.\\\\/:*?\"<>|])[^\\\\/:*?\"<>|]+)?$";
+
+        return fileName.matches(regex);
+    }
 	
 }
